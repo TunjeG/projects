@@ -1,0 +1,186 @@
+{% load static %}
+{% static "images" as baseUrl %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>University Website</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css">
+    </head>
+    <body>
+        <section class="header">
+            <nav>
+                <a href="index.html"><img src="{% static 'images/Logo.jpg' %}"></a>
+                <div class="nav-links" id="navLinks">
+                    <i  class="fa fa-times" onclick="hideMenu()"></i>
+                    <ul>
+                        <li><a href="index.html">HOME</a></li>
+                        <li><a href="about.html">ABOUT</a></li>
+                        <li><a href="courses.html">COURSE</a></li>
+
+                        {% if user.is_authenticated %}
+                        <li class="greet">Hello, {{user.first_name}}</li>
+                        <li><a href="accounts/logout">LOGOUT</a></li>
+                        {% else %}
+                        <li><a href="accounts/register">REGISTER</a></li>
+                        <li><a href="accounts/login">LOGIN</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <i class="fa fa-bars" onclick="showMenu()"></i>
+            </nav>
+            
+        <div class="text-box">
+            <h1>World's best University.</h1>
+            <p>For quality education and stuff.</p>
+            <a href="" class="hero-btn">Visit Us To Know More</a>
+        </div>    
+
+        </section>
+        <!-----Course---->
+        
+        <section class="course">
+            <h1>Courses We Offer</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+            <div class="row">
+                <div class="course-col">
+                    <h3>Intermediate</h3>
+                    <p>web development, computer programming. Business trends and advertising techniques. Hospitality best methods for those interested in catering.</p>
+
+                </div>
+                <div class="course-col">
+                    <h3>Degree</h3>
+                    <p>web development, computer programming. Business trends and advertising techniques. Hospitality best methods for those interested in catering.</p>
+                    
+                </div>
+                <div class="course-col">
+                    <h3>Post Graduation</h3>
+                    <p>web development, computer programming. Business trends and advertising techniques. Hospitality best methods for those interested in catering.</p>
+                    
+                </div>  
+            </div>
+        </section>
+
+        <!------- campus ------->
+        <section class="campus">
+            <h1>Our Global Campus</h1>
+            <P>In understanding lets be men.</P>
+
+            <div class="row">
+                <div class="campus-col">
+                    <img src="{% static 'images/london.png' %}">
+                    <div class="layer">
+                        <h3>LONDON</h3>
+                    </div>
+                </div>
+                <div class="campus-col">
+                    <img src="{% static 'images/newyork.png' %}">
+                    <div class="layer">
+                        <h3>NEW YORK</h3>
+                    </div>
+                </div>
+                <div class="campus-col">
+                    <img src="{% static 'images/washington.jpg' %}">
+                    <div class="layer">
+                        <h3>WASHINGTON</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!----- Facilities ------->
+
+        <section class="facilities">
+            <h1>Our Facilities</h1>
+            <p>Manners maketh a man.</p>
+
+            <div class="row">
+                {% for facilit in facilits %}
+                <div class="facilities-col">
+                    {% if facilit.offer %}
+                    <a href="#">Special offer</a>
+                    {% endif %}
+                    <img src="{{facilit.img.url}}">
+                    <h3>{{facilit.name}}</h3>
+                    <p>{{facilit.comment}}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+
+        <!--------- testimonials ------->
+        <section class="testimonials">
+            <h1>What Our Students Say</h1>
+            <p>We are here to listen.</p>
+
+            <div class="row">
+                <div class="testimonial-col">
+                    <img src="{% static 'images/user1.jpg' %}">
+                    <div>
+                        <p>It's student friendly the lectures are amazing, i highly recommend learning at this university.</p>
+                        <h3>April</h3>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-0"></i>
+                    </div>
+                </div>
+                <div class="testimonial-col">
+                    <img src="{% static 'images/user2.jpg' %}">
+                    <div>
+                        <p>It's student friendly the lectures are amazing, i highly recommend learning at this university.</p>
+                        <h3>Mark</h3>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!------- Call To Action ------>
+        <section class="cta">
+            <h1>Enroll For Our Various Online Courses<br>Anywhere From The World </h1>
+            <a href="" class="hero-btn">CONTACT US</a>
+        </section>
+
+
+        <!------- Footer ------>
+
+        <section class="footer">
+            <h1>About Us</h1>
+            <p>We offer world class education in all our global campuses, cause we believe men used to be men.</p>
+            <div class="icons">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-instagram"></i>
+                <i class="fa fa-linkedin"></i>
+            </div>
+        </section>
+
+
+
+
+        <!-------javaScript for Toggle Menu---- -->
+        <script>
+            var navLinks = document.getElementById("navLinks")
+
+            function showMenu(){
+                navLinks.style.right = "0";
+            }
+            function hideMenu(){
+                navLinks.style.right = "-200px";
+            }
+
+        </script>
+
+    </body>
+</html>
